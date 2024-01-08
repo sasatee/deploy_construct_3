@@ -14,6 +14,26 @@
 
 <link rel="stylesheet" href="style.css">
 
+ <!-- Facebook SDK Initialization -->
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : 'YOUR_APP_ID',
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v12.0'
+            });
+        };
+
+
+  (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 
 </head>
 <body>
@@ -31,6 +51,25 @@ if (location.protocol.substr(0, 4) === "file")
 			<p class="notSupportedMessage">JavaScript appears to be disabled. Please enable it to view this content.</p>
 		</div>
 	</noscript>
+	
+	<button id="facebookLoginButton">Login with Facebook</button>
+
+    <script>
+        document.getElementById('facebookLoginButton').addEventListener('click', function() {
+            FB.login(function(response) {
+                if (response.authResponse) {
+                    // User logged in successfully
+                    console.log('User is logged in', response);
+                    // Handle further actions or retrieve user data here
+                } else {
+                    // User cancelled login or did not authorize
+                    console.log('User cancelled login or did not authorize.');
+                }
+            }, { scope: 'email' }); // Adjust requested permissions as needed
+        });
+    </script>
+	
+	
 	<script src="scripts/supportcheck.js"></script>
 	<script src="scripts/offlineclient.js" type="module"></script>
 	<script src="scripts/main.js" type="module"></script>
