@@ -1,7 +1,7 @@
 {
 	"name": "New project",
 	"short_name": "New project",
-	"description": "",
+	"description": "Burrow your way through a charming carrot-filled world in this playful adventure where a brave bunny hops into the unknown to chase a dream.",
 	"start_url": "index.html",
 	"display": "fullscreen",
 	"orientation": "any",
