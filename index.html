@@ -14,10 +14,51 @@
 
 <link rel="stylesheet" href="style.css">
 
+ <script>
+        function loginWithFacebook() {
+            // Replace 'YOUR_APP_ID' with your actual Facebook App ID
+            window.fbAsyncInit = function() {
+                FB.init({
+                    appId: '617553883791633',
+                    cookie: true,
+                    xfbml: true,
+                    version: 'v13.0'
+                });
 
+                FB.getLoginStatus(function(response) {
+                    if (response.status === 'connected') {
+                        // User is already logged in
+                        var accessToken = response.authResponse.accessToken;
+                        // Perform actions for a logged-in user
+                        // For example, send the accessToken to Construct 3 or perform other game logic
+                    } else {
+                        // User is not logged in, trigger Facebook Login
+                        FB.login(function(response) {
+                            if (response.authResponse) {
+                                var accessToken = response.authResponse.accessToken;
+                                // Perform actions after successful login
+                                // For example, send the accessToken to Construct 3 or perform other game logic
+                            } else {
+                                // Handle login failure or cancellation
+                            }
+                        });
+                    }
+                });
+            };
+
+            // Load the Facebook SDK asynchronously
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "https://connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        }
+    </script>
 </head>
 <body>
-
+ <button onclick="loginWithFacebook()">Login with Facebook</button>
 <script>
 if (location.protocol.substr(0, 4) === "file")
 {
@@ -35,6 +76,8 @@ if (location.protocol.substr(0, 4) === "file")
 	<script src="scripts/offlineclient.js" type="module"></script>
 	<script src="scripts/main.js" type="module"></script>
 	<script src="scripts/register-sw.js" type="module"></script>
+	
+
 
 </body>
 </html>
